@@ -2,19 +2,20 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void wait(void)
+void *wait(void *vargp)
 {
     sleep(2);
 
     printf("Done.\n");
+
+    return NULL;
 }
 
 int main(void)
 {
     pthread_t thread;
-    int err;
-
-    err = pthread_create(&thread, NULL, wait, NULL);
+    
+    int err = pthread_create(&thread, NULL, wait, NULL);
 
     if (err) {
         printf("An error occured: %d", err);
